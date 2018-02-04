@@ -1,8 +1,5 @@
-// Test sketch for El Escudo Dos
-// Turn each EL channel (A-H) on in sequence and repeat
-// Mike Grusin, SparkFun Electronics
-
-
+// sketch to drive the El wire installation part of the biophilia art installation using the SparkFun El Sequencer
+// Bobb Amidon
 
 void setup() {                
   // The EL channels are on pins 2 through 9
@@ -21,28 +18,31 @@ void setup() {
   pinMode(13, OUTPUT);    
 }
 
-void blink(int x, int y) {
-  digitalWrite(x, HIGH);   // turn the EL channel on
-  delay(y);              // wait for <y> miliseconds
-  digitalWrite(x, LOW);    // turn the EL channel off
+void pulse(int channel_num, int pulse_length) {
+  digitalWrite(channel_num, HIGH);   // turn the EL <channel_num> on
+  delay(pulse_length);              // wait for <pulse_length> miliseconds
+  digitalWrite(channel_num, LOW);    // turn the EL <channel_num> off
 }
 
-void shannon_blink_sequence(int x) {  
-  int num_blinks = random(1, 3);
-  int blink_length = 100;
+void biophilia_pulse_sequence(int x) {
+  // generates random pulse sequence call and response
+  
+  int num_pulses = random(1, 3); // sets the number of flashes to be used in this loop; currently a random number between 1 and 3
+  int pulse_length = 100;  // sets how long a channel is on
 
-  for (int i=0; i < num_blinks; i++) {
-    blink(x, blink_length);
+  for (int i=0; i < num_pulses; i++) {
+    pulse(x, pulse_length);
     delay(50); 
-    blink(x, blink_length);
+    pulse(x, pulse_length);
   }
 
   delay(random(500, 1000));
   
-  for (int i=0; i < num_blinks; i++) {
-    blink(x+1, blink_length);
+  for (int i=0; i < num_pulses; i++) {
+    pulse(x+1, pulse_length);
     delay(50); 
-    blink(x+1, blink_length);
+    pulse(x+1, pulse_length);
+    blink
   }
 }
 
@@ -57,7 +57,7 @@ void loop()
   }
 
   
-  shannon_blink_sequence(random(2, 9));
+  biophilia_pulse_sequence(random(2, 9));
 
   digitalWrite(10, status);   // blink both status LEDs
   digitalWrite(13, status);
