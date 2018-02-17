@@ -29,10 +29,11 @@ void biophilia_pulse_sequence(int x) {
   
   int num_pulses = random(1, 3); // sets the number of flashes to be used in this loop; currently a random number between 1 and 3
   int pulse_length = 100;  // sets how long a channel is on
+  int delay_length = 50;  // sets how long a channel is on
 
   for (int i=0; i < num_pulses; i++) {
     pulse(x, pulse_length);
-    delay(50); 
+    delay(delay_length); 
     pulse(x, pulse_length);
   }
 
@@ -40,9 +41,8 @@ void biophilia_pulse_sequence(int x) {
   
   for (int i=0; i < num_pulses; i++) {
     pulse(x+1, pulse_length);
-    delay(50); 
+    delay(delay_length); 
     pulse(x+1, pulse_length);
-    blink
   }
 }
 
