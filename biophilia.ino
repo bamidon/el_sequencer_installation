@@ -24,6 +24,7 @@ void pulse(int channel_num, int pulse_length) {
   digitalWrite(channel_num, LOW);    // turn the EL <channel_num> off
 }
 
+
 void biophilia_pulse_sequence(int channel) {
   // generates random pulse sequence call and response
   
@@ -45,6 +46,21 @@ void biophilia_pulse_sequence(int channel) {
     pulse(channel+1, pulse_length);
     delay(delay_length); 
     pulse(channel+1, pulse_length);
+
+  int delay_length = 50;  // sets how long a channel is on
+
+  for (int i=0; i < num_pulses; i++) {
+    pulse(x, pulse_length);
+    delay(delay_length); 
+    pulse(x, pulse_length);
+  }
+
+  delay(random(500, 1000));
+  
+  for (int i=0; i < num_pulses; i++) {
+    pulse(x+1, pulse_length);
+    delay(delay_length); 
+    pulse(x+1, pulse_length);
   }
 }
 
@@ -59,7 +75,9 @@ void loop()
   }
 
   
+
   biophilia_pulse_sequence(random(2, 8)); // generate a pulse sequence on a random channel between 2 and 8
+
 
   digitalWrite(10, status);   // blink both status LEDs
   digitalWrite(13, status);
